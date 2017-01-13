@@ -1,4 +1,4 @@
-# QE_ultils
+# pwuc.x
 Quantum ESPRESSO unit conversion tool
 
 Usage: `pwuc.x arg1 arg2`
