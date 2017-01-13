@@ -2,3 +2,4 @@ kind.f90
 constants.f90
 *.o
 *.mod
+pwuc
