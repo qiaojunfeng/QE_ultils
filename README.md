@@ -13,3 +13,5 @@ Usage: pwuc arg1 arg2
     * b2a  : bohr to angstrom
     * a2b  : angstrom to bohr
     * ls   : list all constant in QE
+
+when using `ls` as `arg1`, doesn't need `arg2`
