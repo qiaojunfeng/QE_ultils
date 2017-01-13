@@ -16,3 +16,7 @@ constants: kinds
 
 kinds:
 	$(F90) -c kind.f90
+
+clean:
+	rm *.o *.mod
+	rm pwuc
