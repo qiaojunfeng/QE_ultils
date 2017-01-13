@@ -1,5 +1,5 @@
-kind.f90
-constants.f90
-*.o
-*.mod
-pwuc
+pwuc/kind.f90
+pwuc/constants.f90
+pwuc/*.o
+pwuc/*.mod
+pwuc/pwuc.x
