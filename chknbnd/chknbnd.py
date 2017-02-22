@@ -59,7 +59,7 @@ def main():
     else:
         print('all kpoints have empty bands')
 
-if __name__ == 'main':
+if __name__ == '__main__':
     main()
 else:
     pass
