@@ -8,21 +8,23 @@ def getXmlInfo(ifile):
     AUTOEV = 27.211383860484776  # from pwuc.x ls
     OCCTOL = 1e-80    # tolerance for occupation number
     tree = etree.parse(ifile)
-    print('    nbnd = ', tree.xpath('/Root/INFO/@nbnd')[0])
+    #print('    nbnd = ', tree.xpath('/Root/INFO/@nbnd')[0])
     eig = tree.xpath('/Root/EIGENVALUES/text()')[0].split()
     occ = tree.xpath('/Root/OCCUPATIONS/text()')[0].split()
-    print('    highest band(eig/eV, occ): ', float(eig[-1])*AUTOEV, occ[-1])
+    #print('    highest band(eig/eV, occ): ', float(eig[-1])*AUTOEV, occ[-1])
     if abs(float(occ[-1])) < OCCTOL:
         return 0
     else:
-        print('****** highest band not empty ******, occ = ', occ)
+        print('****** highest band not empty ******, occ = ', occ[-1])
         return 1
 
 def main():
     homepath = os.getcwd()
     print(homepath)
     destpath = input("dir for *.save (./tempdir/*.save): ")
+    print()
     notEmptyCount = 0
+    i = 0
 
     if destpath == '':
         try:
@@ -47,11 +49,15 @@ def main():
 
     kdir = [ idir for idir in os.listdir(destpath) if os.path.isdir(os.path.join(destpath, idir)) ]
     for idir in kdir:
-        print(idir)
         eigxml = [ tmp for tmp in os.listdir(idir) if re.search('eigenval.?\.xml', tmp) ]
         for ixml in eigxml:
-            print(ixml)
-            notEmptyCount += getXmlInfo(os.path.join(destpath, idir, ixml))
+            i = getXmlInfo(os.path.join(destpath, idir, ixml))
+            if i:
+                print('in', idir, ixml)
+                print()
+            else:
+                pass
+            notEmptyCount += i
     print()
     print()
     if notEmptyCount > 0:
