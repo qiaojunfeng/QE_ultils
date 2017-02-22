@@ -7,3 +7,5 @@ including:
 * pwuc.x
 
 * cp_scf_file.sh
+
+* chknbnd
