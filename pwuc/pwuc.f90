@@ -33,24 +33,51 @@ PROGRAM pwuc
     call get_command_argument(1, argkind)
     call get_command_argument(2, argval)
     read(argval, *) inval
-    if (argkind == 'ry2ev') then
-        outval = inval * RYTOEV
-    elseif (argkind == 'ev2ry') then
-        outval = inval / RYTOEV
-    elseif (argkind == 'au2ev') then
-        outval = inval * AUTOEV
-    elseif (argkind == 'ev2au') then
-        outval = inval / AUTOEV
-    elseif (argkind == 'b2a') then
-        outval = inval * BOHR_RADIUS_ANGS
-    elseif (argkind == 'a2b') then
-        outval = inval / BOHR_RADIUS_ANGS
-    else
+
+    select case(argkind)
+    case('ry2ev')
+        outval = conv(argkind, inval)
+    case('ev2ry')
+        outval = conv(argkind, inval)
+    case('au2ev')
+        outval = conv(argkind, inval)
+    case('ev2au')
+        outval = conv(argkind, inval)
+    case('b2a')
+        outval = conv(argkind, inval)
+    case('a2b')
+        outval = conv(argkind, inval)
+    case default
         call print_help()
         stop
-    end if
+    end select
 
     write(*,'(G24.17)') outval
+
+contains
+real (DP) function conv(argkind, inval)
+    USE kinds, ONLY : DP
+    USE constants
+    implicit none
+    character(len=256), intent(in) :: argkind
+    real (DP), intent(in) :: inval
+
+    if (argkind == 'ry2ev') then
+        conv = inval * RYTOEV
+    elseif (argkind == 'ev2ry') then
+        conv = inval / RYTOEV
+    elseif (argkind == 'au2ev') then
+        conv = inval * AUTOEV
+    elseif (argkind == 'ev2au') then
+        conv = inval / AUTOEV
+    elseif (argkind == 'b2a') then
+        conv = inval * BOHR_RADIUS_ANGS
+    elseif (argkind == 'a2b') then
+        conv = inval / BOHR_RADIUS_ANGS
+    else
+        stop
+    end if
+end function conv
 
 END PROGRAM pwuc
 
