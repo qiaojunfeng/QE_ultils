@@ -36,17 +36,17 @@ PROGRAM pwuc
 
     select case(argkind)
     case('ry2ev')
-        outval = conv(argkind, inval)
+        call conv(outval, argkind, inval)
     case('ev2ry')
-        outval = conv(argkind, inval)
+        call conv(outval, argkind, inval)
     case('au2ev')
-        outval = conv(argkind, inval)
+        call conv(outval, argkind, inval)
     case('ev2au')
-        outval = conv(argkind, inval)
+        call conv(outval, argkind, inval)
     case('b2a')
-        outval = conv(argkind, inval)
+        call conv(outval, argkind, inval)
     case('a2b')
-        outval = conv(argkind, inval)
+        call conv(outval, argkind, inval)
     case default
         call print_help()
         stop
@@ -54,32 +54,31 @@ PROGRAM pwuc
 
     write(*,'(G24.17)') outval
 
-contains
-real (DP) function conv(argkind, inval)
+END PROGRAM pwuc
+
+subroutine conv(outval, argkind, inval)
     USE kinds, ONLY : DP
     USE constants
     implicit none
-    character(len=256), intent(in) :: argkind
-    real (DP), intent(in) :: inval
+    character(len=256) :: argkind
+    real (DP) :: inval, outval
 
     if (argkind == 'ry2ev') then
-        conv = inval * RYTOEV
+        outval = inval * RYTOEV
     elseif (argkind == 'ev2ry') then
-        conv = inval / RYTOEV
+        outval = inval / RYTOEV
     elseif (argkind == 'au2ev') then
-        conv = inval * AUTOEV
+        outval = inval * AUTOEV
     elseif (argkind == 'ev2au') then
-        conv = inval / AUTOEV
+        outval = inval / AUTOEV
     elseif (argkind == 'b2a') then
-        conv = inval * BOHR_RADIUS_ANGS
+        outval = inval * BOHR_RADIUS_ANGS
     elseif (argkind == 'a2b') then
-        conv = inval / BOHR_RADIUS_ANGS
+        outval = inval / BOHR_RADIUS_ANGS
     else
         stop
     end if
-end function conv
-
-END PROGRAM pwuc
+end subroutine conv
 
 subroutine print_help()
     implicit none
