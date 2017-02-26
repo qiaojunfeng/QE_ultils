@@ -12,3 +12,4 @@ including:
 
 * linux
   * fileCount.sh
+  * greptime.sh
