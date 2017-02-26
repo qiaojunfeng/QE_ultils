@@ -9,3 +9,6 @@ including:
 * cp_scf_file.sh
 
 * chknbnd
+
+* linux
+  * fileCount.sh
