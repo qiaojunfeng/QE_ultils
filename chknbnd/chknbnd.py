@@ -107,7 +107,7 @@ def traverseDestDir(destpath):
         print('all kpoints have empty bands')
     return not_emp_count, min_emp_bnd
 
-def plotMat(mat, not_emp_count, min_emp_bnd):
+def plotMat(figname, mat, not_emp_count, min_emp_bnd):
     if np.all(mat[1][0] == -10):
         # only eigenval1.xml exists
         plt.figure(figsize=(40, 10), dpi=300)
@@ -142,7 +142,7 @@ def plotMat(mat, not_emp_count, min_emp_bnd):
         plt.text(0, 0, 'min(#empty bands) = '+str(min_emp_bnd[1]))
         plt.text(0, 2, '#kpoints no empty bands = '+str(not_emp_count[1]))
 
-    plt.savefig('fig_occ.jpg', dpi=300)
+    plt.savefig(figname, dpi=300)
 
 def main():
     homepath = os.getcwd()
@@ -152,7 +152,8 @@ def main():
     print()
     print('Ploting occupations ...')
     os.chdir(homepath)
-    plotMat(mat_all_occ, not_emp_count, min_emp_bnd)
+    figname = 'fig_occ-' + os.path.split(homepath)[-1] + '.jpg'
+    plotMat(figname, mat_all_occ, not_emp_count, min_emp_bnd)
     print('Plot finished.')
 
 if __name__ == '__main__':
