@@ -100,7 +100,7 @@ def traverseDestDir(homepath, destpath):
             tst_full = 1 if emp_bnd_num == 0 else 0
             if tst_full:
                 outstr = ('in ' + str(idir) + ' ' + str(jxml) + '\n'
-                         '****** highest band not empty ******, occ = ' + str(mat_occ[-1]))
+                         '****** highest band not empty ******, occ = ' + str(mat_occ[-1]) + '\n')
                 print(outstr, end='')
                 ftxt.write(outstr)
             else:
