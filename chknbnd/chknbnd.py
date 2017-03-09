@@ -65,8 +65,9 @@ def getKlistNbnd(destpath):
     return kdir, nbnd
 
 
-def traverseDestDir(destpath):
+def traverseDestDir(homepath, destpath):
     global mat_all_eig, mat_all_occ
+    ftxt = open(os.path.join(homepath, 'occ-' + os.path.split(homepath)[-1] + '.txt'), 'w')
 
     (kdir, nbnd) = getKlistNbnd(destpath)
     # -10 to debug abnormal situation
@@ -79,7 +80,7 @@ def traverseDestDir(destpath):
     min_emp_bnd = [-1, -1]
 
     for i, idir in enumerate(kdir):
-        print(idir)
+        #print(idir)
         eigxml = [tmp for tmp in os.listdir(idir) if re.search('eigenval.?\.xml', tmp)]
         for j, jxml in enumerate(eigxml):
             (mat_eig, mat_occ) = getXmlInfo(os.path.join(destpath, idir, jxml))
@@ -87,6 +88,10 @@ def traverseDestDir(destpath):
             mat_all_occ[j][i] = np.array(mat_occ)
 
             emp_bnd_num = getEmpBndNum(mat_occ)
+            outstr = ('in ' + str(idir) + ' ' + str(jxml) + '\n' 
+                     '       number of empty bands = ' + str(emp_bnd_num) + '\n')
+            print(outstr, end='')
+            ftxt.write(outstr)
             if (emp_bnd_num < min_emp_bnd[j]) or (min_emp_bnd[j]<0):
                 min_emp_bnd[j] = emp_bnd_num
             else:
@@ -94,17 +99,28 @@ def traverseDestDir(destpath):
 
             tst_full = 1 if emp_bnd_num == 0 else 0
             if tst_full:
-                print('in', idir, jxml)
-                print('****** highest band not empty ******, occ = ', mat_occ[-1])
+                outstr = ('in ' + str(idir) + ' ' + str(jxml) + '\n'
+                         '****** highest band not empty ******, occ = ' + str(mat_occ[-1]))
+                print(outstr, end='')
+                ftxt.write(outstr)
             else:
                 pass
             not_emp_count[j] += tst_full
-        print()
-    print()
+        outstr = '\n'
+        print(outstr, end='')
+        ftxt.write(outstr)
+    outstr = '\n'
+    print(outstr, end='')
+    ftxt.write(outstr)
     if sum(not_emp_count) > 0:
-        print(str(sum(not_emp_count)), 'kpoints do not have empty bands')
+        outstr = str(sum(not_emp_count)) + 'kpoints do not have empty bands'
+        print(outstr, end='')
+        ftxt.write(outstr)
     else:
-        print('all kpoints have empty bands')
+        outstr = 'all kpoints have empty bands'
+        print(outstr, end='')
+        ftxt.write(outstr)
+    ftxt.close()
     return not_emp_count, min_emp_bnd
 
 def plotMat(figname, mat, not_emp_count, min_emp_bnd):
@@ -148,11 +164,11 @@ def main():
     homepath = os.getcwd()
     destpath = findDestDir(homepath)
     os.chdir(destpath)
-    not_emp_count, min_emp_bnd = traverseDestDir(destpath)
+    not_emp_count, min_emp_bnd = traverseDestDir(homepath, destpath)
     print()
     print('Ploting occupations ...')
     os.chdir(homepath)
-    figname = 'fig_occ-' + os.path.split(homepath)[-1] + '.jpg'
+    figname = 'occ-' + os.path.split(homepath)[-1] + '.jpg'
     plotMat(figname, mat_all_occ, not_emp_count, min_emp_bnd)
     print('Plot finished.')
 
