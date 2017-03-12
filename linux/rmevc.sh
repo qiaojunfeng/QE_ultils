@@ -19,7 +19,7 @@ echo -e 'Delete?(Y/n):\c '
 read sel
 sel=`echo $sel | tr '[A-Z]' '[a-z]'`
 sel=${sel:0:1}
-if [[ "$sel" == "y" ]]; then
+if [[ "$sel" == "y" || -z "$sel" ]]; then
     xargs rm -rf < tchg.list
     echo 'Deleted.'
 fi
