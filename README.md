@@ -13,3 +13,4 @@ including:
 * linux
   * fileCount.sh
   * greptime.sh
+  * rmevc.sh
