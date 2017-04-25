@@ -1,4 +1,7 @@
 #!/bin/bash
+# should ensure you are currently in '1-par/' or '2-per'
+# both '1-par' and '2-per' should exist.
+# fermi energy will be extracted from '2-per'
 
 touchProjPar() {
     cat << EOF > proj_par.in
@@ -42,7 +45,7 @@ touchProjPer() {
 EOF
 }
 
-PWD=`pwd`
+PWDIR=`pwd`
 CURDIR=`basename $PWD`
 
 if [ -e 'proj_par.in' ]; then
@@ -64,9 +67,14 @@ else
     exit 1
 fi
 
-
+if [ -d "../2-per/" ]; then
+    cd ../2-per/
+else
+    exit 1
+fi
 FERMI=`grepfermi.sh | tail -2 | head -1`
 FERMIEV=`pwuc au2ev $FERMI`
+cd $PWDIR
 
 echo $FERMIEV
 
