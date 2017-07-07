@@ -14,3 +14,6 @@ including:
   * fileCount.sh
   * greptime.sh
   * rmevc.sh
+
+* dos
+  * getemin.py

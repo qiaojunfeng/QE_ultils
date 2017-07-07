@@ -113,7 +113,7 @@ def traverseDestDir(homepath, destpath):
     print(outstr, end='')
     ftxt.write(outstr)
     if sum(not_emp_count) > 0:
-        outstr = str(sum(not_emp_count)) + 'kpoints do not have empty bands'
+        outstr = str(sum(not_emp_count)) + ' kpoints do not have empty bands'
         print(outstr, end='')
         ftxt.write(outstr)
     else:
