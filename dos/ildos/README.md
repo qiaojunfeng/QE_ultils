@@ -10,3 +10,5 @@ Only compatible with my modified QE `pp.x` with `plot_num = 10`.
 Usage: `./getemin.py dosfile`
 
 where dosfile is the output file of dos.x
+
+Note: cal_ildos.m is the matlab version.
