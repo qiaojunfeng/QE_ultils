@@ -118,7 +118,7 @@ f_save = 'mae_k.dat'
 f = open(f_save, 'w')
 
 # store first five biggest mae_k and index
-f.write('sum(mae_k) = ' + str(mae) + '\n')
+f.write('sum(mae_k) = ' + str(mae) + ' meV/per kpt\n')
 f.write('first five biggest mae_k in matrix' + '\n')
 inds = sorted(range(len(mae_k)), key=lambda x: mae_k[x], reverse=True)
 for i in range(5):

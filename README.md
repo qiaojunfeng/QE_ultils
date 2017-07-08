@@ -17,3 +17,8 @@ including:
 
 * dos
   * getemin.py
+  * kpdos
+    * cal_kpdos.py
+    * plot_k_mae.py
+  * ildos
+    * sum_ildos.py
