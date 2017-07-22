@@ -9,7 +9,7 @@ f_save = 'mae_k.dat'
 f = open(f_save)
 
 # store first five biggest mae_k and index
-for i in range(7):
+for i in range(14):
     f.readline()    # discard header
 
 # read matrix

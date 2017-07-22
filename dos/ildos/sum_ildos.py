@@ -43,11 +43,11 @@ f.close()
 ###
 
 #BOHR_RADIUS_ANGS = 0.52917720858999995;
-RY_TO_EV = 13.605691930242388
+#RY_TO_EV = 13.605691930242388
 
 #mae = mae * (L_x*L_y*L_z);
-mae = mae / (n_x*n_y*n_z)
+#mae = mae / (n_x*n_y*n_z)
 
 # final unit is meV
-mae = mae * 1000 * RY_TO_EV
+#mae = mae * 1000 * RY_TO_EV
 print( 'mae form ldos = ' + str(mae) + ' meV\n')
