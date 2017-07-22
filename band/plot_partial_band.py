@@ -438,11 +438,15 @@ def main():
     os.chdir('/home/joe/git/qe_test/3CoFe_Vacuum/kpt_20/4-nbnd_40/2-mae/calc_integral_ildos/plotproj_k')
     print(os.getcwd())
 
-    kpdos = '../../1-par/kpdos/par_kpdos.out'
-    #kpdos = '../../1-par/kpdos/out'
-    fermi = '../../1-par/per_fermi'
-    plotin = './plotproj_k.in'
-    plotout = './plotproj_k.out'
+    #kpdos = '../../1-par/kpdos/par_kpdos.out'
+    #fermi = '../../1-par/per_fermi'
+    #plotin = './plotproj_k.in'
+    #plotout = './plotproj_k.out'
+
+    kpdos = sys.argv[0]
+    fermi = sys.argv[1]
+    plotin = sys.argv[2]
+    plotout = sys.argv[3]
 
     params = Params(kpdos, fermi, plotin, plotout)
 
